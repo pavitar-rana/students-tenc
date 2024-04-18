@@ -9,33 +9,34 @@ export async function POST(req: Request) {
   });
 
   try {
-    const { phone, password } = await req.json();
+    var { sCourse } = await req.json();
+    //  change scourse to lowercase and remove spaces
+    sCourse = sCourse.toLowerCase().replace(/\s/g, "");
+    console.log("sCourse", sCourse);
 
     // Get phone and password from the table name student and then match it with the input
     const connection = await pool.getConnection();
 
     const [rows, fields]: [RowDataPacket[], FieldPacket[]] =
-      await connection.query(
-        "SELECT * FROM student WHERE phone = ? AND password = ?",
-        [phone, password]
-      );
+      await connection.query("SELECT * FROM topics WHERE course = ?", [
+        sCourse,
+      ]);
 
     connection.release();
 
-    console.log("rows : ", rows);
+    console.log("topic : ", rows);
 
-    if (rows.length === 0) {
-      console.log("Login failed");
-      return new Response("Failed");
-    }
+    // if (rows.length === 0) {
+    //   console.log(" failed");
+    //   return new Response("Failed");
+    // }
 
-    var result = rows[0];
+    var result = rows;
 
-    console.log("Login successfully");
+    console.log(" successful");
 
     return new Response(JSON.stringify(result));
   } catch (e) {
     console.log("There was an error in the POST request", e);
-    return new Response("Failed");
   }
 }

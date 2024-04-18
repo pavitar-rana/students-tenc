@@ -19,3 +19,8 @@ export const sId = atom({
   key: "sId", // unique ID (with respect to other atoms/selectors)
   default: "", // default value (aka initial value)
 });
+
+export const course = atom({
+  key: "course",
+  default: "",
+});

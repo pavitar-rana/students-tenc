@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/dialog";
 import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export const menuItems = [
   {
@@ -33,6 +34,10 @@ export const menuItems = [
     name: "Test",
     route: "/dashboard/test",
   },
+  {
+    name: "Topics",
+    route: "/dashboard/topics",
+  },
 ];
 
 function DsLayout({ children }: { children: React.ReactNode }) {
@@ -44,7 +49,10 @@ function DsLayout({ children }: { children: React.ReactNode }) {
     <>
       <div className="flex">
         <div className="bg-[#111827] xl:w-[17vw] w-0 h-[100vh] text-[#D1D5DB] ">
-          <div className="pl-10 pt-5">Logo</div>
+          <div className="pl-10 pt-5">
+            {/* <Image src="/tcc-logo.png" alt="logo" width={50} height={50} /> */}
+            {/* Logo */}
+          </div>
           <div className="h-[1px] bg-[#1F2937] w-[17vw] mt-10"></div>
           {/* <NavBar /> */}
           <div className="mt-10 flex flex-col px-4">
@@ -52,17 +60,9 @@ function DsLayout({ children }: { children: React.ReactNode }) {
               return (
                 <Link
                   key={item.name}
-                  href={
-                    item.route === "/dashboard"
-                      ? `${item.route}/${id}`
-                      : item.route
-                  }
+                  href={item.route}
                   className={
-                    pathname === `${item.route}/${id}`
-                      ? pathname === `${"/dashboard"}/${id}`
-                        ? "bg-[#242A38] py-2 px-4 mb-2 text-[#12B981] rounded-sm"
-                        : "py-2 px-4 rounded-sm mb-2"
-                      : pathname === item.route
+                    pathname === `${item.route}`
                       ? "bg-[#242A38] py-2 px-4 mb-2 text-[#12B981] rounded-sm"
                       : "py-2 px-4 rounded-sm mb-2"
                   }
@@ -75,7 +75,7 @@ function DsLayout({ children }: { children: React.ReactNode }) {
         </div>
         <div className="flex flex-col bg-[#F9FAFC]">
           <div className="bg-white lg:w-[83vw] w-[100vw] flex justify-between lg:px-6 pr-6  pl-2 py-3">
-            <div className="flex gap-4">
+            <div className="flex gap-4 items-center">
               <div className="cursor-pointer lg:hidden block">
                 {/* <ResNavBar /> */}
                 <Dialog>
@@ -90,17 +90,9 @@ function DsLayout({ children }: { children: React.ReactNode }) {
                           <DialogClose asChild key={item.name}>
                             <Link
                               key={item.name}
-                              href={
-                                item.route === "/dashboard"
-                                  ? `${item.route}/${id}`
-                                  : item.route
-                              }
+                              href={item.route}
                               className={
-                                pathname === `${item.route}/${id}`
-                                  ? pathname === `${"/dashboard"}/${id}`
-                                    ? "bg-[#242A38] py-2 px-4 mb-2 text-[#12B981] rounded-sm"
-                                    : "py-2 px-4 rounded-sm mb-2"
-                                  : pathname === item.route
+                                pathname === `${item.route}`
                                   ? "bg-[#242A38] py-2 px-4 mb-2 text-[#12B981] rounded-sm"
                                   : "py-2 px-4 rounded-sm mb-2"
                               }
@@ -114,7 +106,9 @@ function DsLayout({ children }: { children: React.ReactNode }) {
                   </DialogContent>
                 </Dialog>
               </div>
-              <div className="text-lg">Logo</div>
+              <div className="text-lg mt-[-9px]">
+                <Image src="/TCC_PNG.png" alt="logo" width={50} height={50} />
+              </div>
             </div>
             <div>
               <DropdownMenu>

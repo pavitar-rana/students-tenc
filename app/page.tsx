@@ -17,12 +17,13 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { useRecoilState } from "recoil";
-import { sId } from "@/components/recoil-root";
+import { course, sId } from "@/components/recoil-root";
 
 export default function Home() {
   const router = useRouter();
 
   const [id, setId] = useRecoilState(sId);
+  const [sCourse, setCourse] = useRecoilState(course);
 
   const formSchema = z.object({
     phone: z.string().min(10).max(10),
@@ -42,7 +43,8 @@ export default function Home() {
     console.log(result.data);
 
     setId(result.data.id);
-    router.push(`/dashboard/${result.data.id}`);
+    setCourse(result.data.course);
+    router.push(`/dashboard`);
   }
 
   return (
